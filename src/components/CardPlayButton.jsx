@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Pause, Play } from "@/components/Player";
+import { Pause, Play } from "@/icons/reactIcons";
 import { usePlayerStore } from "@/store/playerStore";
 
 export function CardPlayButton({ id }) {

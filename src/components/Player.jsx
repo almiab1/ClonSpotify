@@ -1,42 +1,46 @@
 import { useEffect, useRef, useState } from "react";
 import { usePlayerStore } from "@/store/playerStore";
 
-export const Pause = () => (
-  <svg role="img" height="16" width="16" aria-hidden="true" viewBox="0 0 16 16">
-    <path d="M2.7 1a.7.7 0 0 0-.7.7v12.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7H2.7zm8 0a.7.7 0 0 0-.7.7v12.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7h-2.6z"></path>
-  </svg>
-);
+import { VolumeControl } from "@/components/Player/VolumeControl";
+import { CurrentSong } from "@/components/Player/CurrentSong";
 
-export const Play = () => (
-  <svg role="img" height="16" width="16" aria-hidden="true" viewBox="0 0 16 16">
-    <path d="M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288V1.713z"></path>
-  </svg>
-);
+import { Play, Pause } from "@/icons/reactIcons";
 
 export function Player() {
-  const { currentMusic, isPlaying, setIsPlaying } = usePlayerStore(
+  const { currentMusic, isPlaying, setIsPlaying, volume } = usePlayerStore(
     (state) => state,
   );
   const audioRef = useRef();
+  const volumeRef = useRef(1);
 
   useEffect(() => {
-    audioRef.current.src = `/music/1/01.mp3`;
-  }, []);
+    isPlaying ? audioRef.current.play() : audioRef.current.pause();
+  }, [isPlaying]);
 
-  const handleClick = () => {
-    if (isPlaying) {
-      audioRef.current.pause();
-    } else {
+  useEffect(() => {
+    audioRef.current.volume = volume;
+  }, [volume]);
+
+  useEffect(() => {
+    const { song, playlist, songs } = currentMusic;
+    if (song) {
+      const src = `/music/${playlist?.id}/0${song.id}.mp3`;
+      audioRef.current.src = src;
+      audioRef.current.volume = volume;
       audioRef.current.play();
-      audioRef.current.volume = 0.1;
     }
+  }, [currentMusic]);
 
+  // Handle play/pause
+  const handleClick = () => {
     setIsPlaying(!isPlaying);
   };
 
   return (
     <div className="z-50 flex flex-row justify-between w-full px-4">
-      <div className="">Current Song...</div>
+      <div className="">
+        <CurrentSong {...currentMusic.song} />
+      </div>
 
       <div className="grid flex-1 gap-4 place-content-center">
         <div className="flex justify-center">
@@ -47,7 +51,9 @@ export function Player() {
         </div>
       </div>
 
-      <div className="grid place-content-center"></div>
+      <div className="grid place-content-center">
+        <VolumeControl />
+      </div>
     </div>
   );
 }
