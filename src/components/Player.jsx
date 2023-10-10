@@ -6,6 +6,7 @@ import { usePlayerStore } from "@/store/playerStore";
 
 import { VolumeControl } from "@/components/Player/VolumeControl";
 import { CurrentSong } from "@/components/Player/CurrentSong";
+import { SongControl } from "@/components/Player/SongControl";
 
 import { Play, Pause } from "@/icons/reactIcons";
 // ----------------------------------------------------------------------
@@ -44,16 +45,17 @@ export function Player() {
   };
 
   return (
-    <div className="z-50 flex flex-row justify-between w-full px-4">
-      <div className="">
+    <div className="z-50 flex flex-row justify-between w-full px-1">
+      <div className="w-[200px]">
         <CurrentSong {...currentMusic.song} />
       </div>
 
       <div className="grid flex-1 gap-4 place-content-center">
-        <div className="flex justify-center">
+        <div className="flex flex-col items-center justify-center">
           <button className="p-2 bg-white rounded-full" onClick={handleClick}>
             {isPlaying ? <Pause /> : <Play />}
           </button>
+          <SongControl audio={audioRef} />
           <audio ref={audioRef} />
         </div>
       </div>

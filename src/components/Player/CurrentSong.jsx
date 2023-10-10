@@ -1,3 +1,6 @@
+// ----------------------------------------------------------------------
+// Component for displaying the current song in the player
+// ----------------------------------------------------------------------
 export function CurrentSong({ image, title, artists }) {
   return (
     <div className={"flex items-center gap-5 relative overflow-hidden"}>

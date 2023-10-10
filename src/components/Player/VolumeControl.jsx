@@ -3,7 +3,7 @@
 // ----------------------------------------------------------------------
 import { useRef } from "react";
 import { usePlayerStore } from "@/store/playerStore";
-import { Slider } from "@/components/Slider";
+import { Slider } from "@/components/Player/Slider";
 import { VolumeSilence, Volume } from "@/icons/reactIcons";
 // ----------------------------------------------------------------------
 
