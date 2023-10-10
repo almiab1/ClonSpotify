@@ -2,9 +2,11 @@ import { useEffect, useRef, useState } from "react";
 import { Pause, Play } from "@/icons/reactIcons";
 import { usePlayerStore } from "@/store/playerStore";
 
-export function CardPlayButton({ id }) {
+export function CardPlayButton({ id, size = "small" }) {
   const { currentMusic, isPlaying, setIsPlaying, setCurrentMusic } =
     usePlayerStore((state) => state);
+
+  const isPlayingPlaylist = isPlaying && currentMusic?.playlist.id === id;
 
   const handleClick = () => {
     if (isPlayingPlaylist) {
@@ -21,7 +23,7 @@ export function CardPlayButton({ id }) {
       });
   };
 
-  const isPlayingPlaylist = isPlaying && currentMusic?.playlist.id === id;
+  const iconClassName = size === "small" ? "w-4 h-4" : "w-5 h-5";
 
   return (
     <>
@@ -29,7 +31,11 @@ export function CardPlayButton({ id }) {
         onClick={handleClick}
         className="p-4 transition bg-green-500 rounded-full card-play-button hover:scale-105 hover:bg-green-400"
       >
-        {isPlayingPlaylist ? <Pause /> : <Play />}
+        {isPlayingPlaylist ? (
+          <Pause className={iconClassName} />
+        ) : (
+          <Play className={iconClassName} />
+        )}
       </button>
     </>
   );

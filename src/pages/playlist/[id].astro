@@ -1,8 +1,9 @@
 ---
+import Layout from "@/layouts/Layout.astro";
 import MusicsTable from "@/components/MusicsTable.astro";
-import Layout from "../../layouts/Layout.astro";
+import { CardPlayButton } from "@/components/CardPlayButton";
 
-import { allPlaylists, songs } from "../../lib/data";
+import { allPlaylists, songs } from "@/lib/data";
 const { id } = Astro.params;
 
 const playlist = allPlaylists.find((playlist) => playlist.id === id);
@@ -43,12 +44,17 @@ const playListSongs = songs.filter(
               <span>{playlist?.artists.join(", ")}</span>
             </div>
             <p class="mt-1">
-              <span class="text-white">50 canciones</span>, 3 h aproximadamente
+              <span class="text-white">{playListSongs.length} canciones</span>,
+              3 h aproximadamente
             </p>
           </div>
         </div>
       </div>
     </header>
+
+    <div class="pt-6 pl-6">
+      <CardPlayButton id={id} client:load size="large" />
+    </div>
 
     <div class="relative z-10 px-6 pt-10"></div>
 
