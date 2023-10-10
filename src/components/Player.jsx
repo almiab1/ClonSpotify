@@ -1,3 +1,6 @@
+// ----------------------------------------------------------------------
+// Imports
+// ----------------------------------------------------------------------
 import { useEffect, useRef, useState } from "react";
 import { usePlayerStore } from "@/store/playerStore";
 
@@ -5,7 +8,11 @@ import { VolumeControl } from "@/components/Player/VolumeControl";
 import { CurrentSong } from "@/components/Player/CurrentSong";
 
 import { Play, Pause } from "@/icons/reactIcons";
+// ----------------------------------------------------------------------
 
+// ----------------------------------------------------------------------
+// Component
+// ----------------------------------------------------------------------
 export function Player() {
   const { currentMusic, isPlaying, setIsPlaying, volume } = usePlayerStore(
     (state) => state,
