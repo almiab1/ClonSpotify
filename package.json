@@ -10,14 +10,14 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/mdx": "^1.1.1",
+    "@astrojs/mdx": "^4.3.0",
     "@astrojs/react": "^3.0.3",
-    "@astrojs/svelte": "^4.0.2",
-    "@astrojs/tailwind": "^5.0.0",
+    "@astrojs/svelte": "^7.1.0",
+    "@astrojs/tailwind": "^5.1.5",
     "@radix-ui/react-slider": "^1.1.2",
     "@types/react": "^18.2.25",
     "@types/react-dom": "^18.2.10",
-    "astro": "^3.2.2",
+    "astro": "^5.9.2",
     "clsx": "^2.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
